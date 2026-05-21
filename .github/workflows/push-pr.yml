@@ -1,0 +1,20 @@
+on:
+    push:
+        branches:
+            - main
+            - "release/**" # Trigger on pushes to main and any branches starting with "release/"
+        paths:
+            - "src/**" # Trigger only if changes are made in the src directory
+    pull_request:
+        branches:
+            - main
+            - "release/**"
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6.0.2
+
+            - name: Run tests
+              run: npm test
