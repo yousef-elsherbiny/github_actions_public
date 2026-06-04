@@ -1,0 +1,11 @@
+name: Manual Trigger
+on:
+  workflow_dispatch: # This is the trigger that responsible for
+                     # running actions from GUI or Github CLI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy application
+        run: echo "Deploying the application..."
