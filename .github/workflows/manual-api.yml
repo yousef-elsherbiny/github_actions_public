@@ -1,0 +1,12 @@
+name: API Trigger
+on:
+  repository_dispatch: # This is the trigger that responsible for
+                       # running actions from API
+    types: [incident_report]
+
+jobs:
+  handle-incident:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print incident details
+        run: echo "Incident reported"
