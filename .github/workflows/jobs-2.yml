@@ -1,0 +1,20 @@
+name: Jobs with shell
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        npm install
+        npm run build
+      working-directory: ./temp # Specify which directory
+                              # shell commands run in it
+      shell: bash # Specify type of shell
+                  # Built in shells in runner
+                  # pwsh, cmd, powershell, python
+
+    - run: print %ENV
+      shell: perl {0} # Runs "print %ENV using perl shell
