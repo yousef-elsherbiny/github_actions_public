@@ -1,0 +1,28 @@
+name: Commands & Expressions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  expressions:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print a message
+      run: echo "The job is running"
+      # This step will run only if event is "push"
+      # So in other events like "pull" it will not run
+      if: ${{ github.event_name == 'push' }}
+      
+      # Run job if commit starts with keyword 'WIP'
+      # if: ${{ !contains(github.event.head_commit.message, 'WIP') }}
+      
+      # Run job of commit's tag starts with 'refs/tags/v'
+      # if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+
+    - name: Cleanup on failure
+      run: echo "Deployment failed"
+      # Run job if commit failed
+      # The opposite of it is success()
+      if: failure()
+      # always() -> always runs regardless of the previous step result
+      # cancelled() -> if the previous step was cancelled
