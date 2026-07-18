@@ -1,0 +1,34 @@
+name: Separate steps
+
+on:
+    workflow_dispatch:
+
+jobs:
+    hybrid_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Run a command in Ubuntu
+              run: echo "This is a command running in Ubuntu"
+
+            - name: Run a command in Alpine container
+              uses: docker://alpine:latest
+              with:
+                  entrypoint: /bin/sh # it tells the runner to override the default command
+                                      # that the alpine:latest Docker image would normally
+                                      # execute when it starts up. This forces the container to
+                                      # launch using the Shell binary (/bin/sh) as its executable.
+                  args: -c "echo 'This is a command running in Alpine container'"
+
+            - name: Run another command in Ubuntu
+              run: echo "Back to Ubuntu"
+
+    dockerized_job:
+        runs-on: ubuntu-latest
+        container: # To run the job on a container other than the main container
+            image: ghcr.io/my-org/my-private-image:latest
+                credentials:
+                    username: ${{ secrets.DOCKER_USERNAME }}
+                    password: ${{ secrets.DOCKER_PASSWORD }}
+      steps:
+        - run: node --version
+        - run: echo "This whole job runs inside a Node.js constainer"

@@ -1,0 +1,16 @@
+name: Action param and ENV
+
+on:
+    workflow_dispatch:
+
+jobs:
+    action-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Say hello
+              # uses: actions/checkout@4.2.2    # Public action from GitHub marketplace
+              uses: .github/actions/hello-world # Path of action in you repository
+              with:
+                who-to-greet: Ahmed
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
