@@ -10,7 +10,7 @@ jobs:
                              # false means if job fails, continue execute the other jobs
                              # We follow this strategy because other jobs execute the same tests but in other environments
                              # Other environments like linux, windows, mac
-            max-parellel: 3 # The max number of parellel executed jobs
+            max-parallel: 3 # The max number of parellel executed jobs
             matrix:
                 on: [ubuntu-latest, windows-latest, macos-latest]
                 node_version: [14.x, 15.x, 16.x]
