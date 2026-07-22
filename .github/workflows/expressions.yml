@@ -1,4 +1,4 @@
-name: Commands & Expressions
+name: Expressions
 
 on:
   workflow_dispatch:
