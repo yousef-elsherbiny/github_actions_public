@@ -12,7 +12,16 @@ jobs:
     #     if [[ deprecated ]]; then
     #       echo "::warning::Deprecated function found"
     #     fi
-    - name: Set API key
-      run: echo "API_KEY=12345" >> $GITHUB_ENV
-    - name: Use API Key
-      run: echo "Using API key $API_KEY"
+    
+    # - name: Set API key
+    #   run: echo "API_KEY=12345" >> $GITHUB_ENV
+    # - name: Use API Key
+    #   run: echo "Using API key $API_KEY"
+
+    - name: Check if a file exists
+      run: |
+        if [ -f "config.yaml" ]; then
+          echo "::debug::config.yaml exists"
+        else
+          echo "::error::config.yaml is missing"
+        fi
